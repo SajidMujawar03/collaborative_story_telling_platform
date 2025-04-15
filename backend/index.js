@@ -31,6 +31,7 @@ app.use(express.urlencoded({extended:true}))
 app.use('/api/stories', storyRoutes);
 app.use('/api/contributions', contributionRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/notifications', userRoutes);
 
 
 const connectDB=async ()=>{

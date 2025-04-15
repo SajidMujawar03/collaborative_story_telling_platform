@@ -10,7 +10,7 @@ const Layout = () => {
     <>
     
     <Header/>
-    <main >
+    <main className='min-h-[80vh]'>
            <Router/>
     </main>
     <Footer/>

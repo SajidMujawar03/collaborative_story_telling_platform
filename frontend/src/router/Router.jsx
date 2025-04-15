@@ -8,6 +8,7 @@ import CreateStoryPage from '../pages/CreateStoryPage'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import HomePage from '../pages/HomePage'
+import StoryDetails from '../pages/StoryDetails'
 
 
 const Router = () => {
@@ -20,8 +21,11 @@ const Router = () => {
             <Route path='/register' element={<RegisterPage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/create' element={<CreateStoryPage/>}/>
+            <Route path="/full-story/:id" element={<StoryDetails />} />
             <Route path='/story/:id' element={<StoryPage/>}/>
             <Route path='/profile/:id' element={<UserProfile/>}/>
+            
+            
             <Route path='/my-stories' element={<MyStories/>}/>
             <Route path='/my-contributions' element={<MyContributions/>}/>
 
