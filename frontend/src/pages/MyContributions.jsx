@@ -31,7 +31,7 @@ const MyContributions = () => {
               key={contrib._id}
               className="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm hover:shadow-md transition-all duration-200"
             >
-              <p className="text-gray-700 mb-4">{contrib.content}</p>
+              <p className="text-gray-700 mb-4 whitespace-pre-wrap">{contrib.content}</p>
 
               <p className="text-sm text-gray-500">
                 Story:{" "}

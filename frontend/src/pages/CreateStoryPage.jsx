@@ -1,12 +1,17 @@
-// pages/CreateStoryPage.jsx
 import { useState } from 'react';
 import axios from "../../axiosConfig.js";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../Context/authContext.jsx';
 
+const genreOptions = [
+  'fantasy', 'sci-fi', 'romance', 'thriller', 'mystery', 
+  'horror', 'comedy', 'drama', 'adventure', 'historical'
+];
+
 const CreateStoryPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [genre, setGenre] = useState('');
   const navigate = useNavigate();
   const { user } = useAuth();
   const token = localStorage.getItem('token');
@@ -14,25 +19,25 @@ const CreateStoryPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Trim trailing spaces from each line but preserve spacing, gaps, line breaks
       const cleanedContent = content
         .split('\n')
-        .map(line => line.replace(/\s+$/, '')) // remove trailing spaces
+        .map(line => line.replace(/\s+$/, ''))
         .join('\n');
-  
+
       await axios.post('/api/stories', {
         title: title.trim(),
+        genre,
         text: cleanedContent,
         createdBy: user._id,
       }, {
         headers: { Authorization: `Bearer ${token}` },
       });
+
       navigate('/');
     } catch (err) {
       console.error(err);
     }
   };
-  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-white px-4">
@@ -51,6 +56,23 @@ const CreateStoryPage = () => {
               required
             />
           </div>
+
+          <div>
+            <label htmlFor="genre" className="block text-sm font-medium text-gray-700 mb-1">Genre</label>
+            <select
+              id="genre"
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-400 focus:outline-none transition"
+            >
+              <option value="" disabled>Select a genre</option>
+              {genreOptions.map(g => (
+                <option key={g} value={g}>{g[0].toUpperCase() + g.slice(1)}</option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">Start Writing</label>
             <textarea
@@ -62,6 +84,7 @@ const CreateStoryPage = () => {
               required
             />
           </div>
+
           <button
             type="submit"
             className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition duration-300 shadow-md"

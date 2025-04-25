@@ -43,7 +43,7 @@ const Header = () => {
           ) : (
             <>
               <Link to="/login" className="hover:text-blue-500 transition duration-200">Login</Link>
-              <Link to="/register" className="hover:text-blue-500 transition duration-200">Register</Link>
+              {/* <Link to="/register" className="hover:text-blue-500 transition duration-200">Register</Link> */}
             </>
           )}
         </nav>

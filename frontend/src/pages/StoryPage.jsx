@@ -104,6 +104,7 @@ const StoryPage = () => {
       );
       fetchData();
     } catch (err) {
+      console.log(err)
       console.error("Error voting:", err);
     }
   };
@@ -140,7 +141,7 @@ const StoryPage = () => {
       <div className="bg-gradient-to-br from-white to-blue-50 p-6 rounded-xl shadow-md space-y-4 border border-blue-100">
         {story.content.map((c, index) => (
           <div key={index} className={`p-3 rounded-lg ${c.selected ? 'bg-green-50 border-l-4 border-green-500' : 'bg-white'}`}>
-            <p className="text-gray-800 leading-relaxed">{c.text}</p>
+            <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">{c.text}</p>
             <p className="text-sm text-gray-500 mt-1">— {c.contributedBy?.name || story.createdBy?.name || "Unknown"}</p>
           </div>
         ))}
@@ -227,7 +228,7 @@ const StoryPage = () => {
                 c.isSelected ? 'bg-green-50 border-green-300' : 'bg-white hover:shadow-md'
               }`}
             >
-              <p className="text-gray-800">{c.text}</p>
+              <p className="text-gray-800 whitespace-pre-wrap">{c.text}</p>
               <p className="text-sm text-gray-500 mt-1">
                 By: {c.contributedBy?.name || 'Unknown'}
               </p>
