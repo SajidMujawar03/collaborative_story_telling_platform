@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import axios from "../../axiosConfig.js";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/authContext.jsx';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', avatar: '' });
   const navigate = useNavigate();
+  const {login}=useAuth()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,8 +21,10 @@ const RegisterPage = () => {
         password: formData.password,
       });
 
-      localStorage.setItem('token', loginRes.data.token);
-      localStorage.setItem('user', JSON.stringify(loginRes.data.user));
+      login(loginRes.data.user,loginRes.data.token)
+
+      // localStorage.setItem('token', );
+      // localStorage.setItem('user', JSON.stringify());
 
       navigate('/');
     } catch (err) {

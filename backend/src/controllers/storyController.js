@@ -28,10 +28,9 @@ const createNotification = async (user, message, storyId) => {
 
 
 
-
 export const createStory = async (req, res) => {
   try {
-    const { title, text, createdBy } = req.body;
+    const { title, text, createdBy, genre } = req.body;
 
     // Clean trailing spaces from each line in the text
     const cleanedText = text
@@ -41,10 +40,11 @@ export const createStory = async (req, res) => {
 
     const newStory = new Story({
       title,
+      genre,
       createdBy,
       content: [
         {
-          text: cleanedText,  // Use the cleaned text
+          text: cleanedText,
           contributedBy: createdBy,
           selected: true
         }
